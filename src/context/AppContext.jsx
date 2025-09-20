@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useMemo } from 'react';
 import { api } from '../services/api';
 import toast from 'react-hot-toast';
 
@@ -214,7 +214,7 @@ export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   // Actions
-  const actions = {
+  const actions = useMemo(() => ({
     // Set loading state
     setLoading: (key, value) => {
       dispatch({ type: ActionTypes.SET_LOADING, payload: { key, value } });
@@ -476,14 +476,14 @@ export const AppProvider = ({ children }) => {
     disableRealTimeUpdates: () => {
       dispatch({ type: ActionTypes.SET_REAL_TIME_UPDATES, payload: false });
     },
-  };
+  }), [dispatch]);
 
   // Load initial data
   useEffect(() => {
     actions.loadProducts();
     actions.loadRecentPurchases();
     actions.loadAnalytics();
-  }, [state.filters, state.searchQuery, state.sortBy, state.currentPage]);
+  }, [actions, state.filters, state.searchQuery, state.sortBy, state.currentPage]);
 
   // Real-time updates simulation
   useEffect(() => {
@@ -496,7 +496,7 @@ export const AppProvider = ({ children }) => {
     }, 5000); // Update every 5 seconds
 
     return () => clearInterval(interval);
-  }, [state.realTimeUpdates]);
+  }, [actions, state.realTimeUpdates]);
 
   const value = {
     state,

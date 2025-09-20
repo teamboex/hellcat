@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   TrendingUp,
   DollarSign,
@@ -15,11 +15,7 @@ const Analytics = () => {
   const [timeRange, setTimeRange] = useState('7d');
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    loadAnalytics();
-  }, [timeRange]);
-
-  const loadAnalytics = async () => {
+  const loadAnalytics = useCallback(async () => {
     setIsLoading(true);
     try {
       await actions.loadAnalytics();
@@ -28,7 +24,11 @@ const Analytics = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [actions]);
+
+  useEffect(() => {
+    loadAnalytics();
+  }, [loadAnalytics, timeRange]);
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', {
@@ -44,20 +44,6 @@ const Analytics = () => {
     });
   };
 
-  const getTimeRangeLabel = (range) => {
-    switch (range) {
-      case '24h':
-        return 'Last 24 Hours';
-      case '7d':
-        return 'Last 7 Days';
-      case '30d':
-        return 'Last 30 Days';
-      case '90d':
-        return 'Last 90 Days';
-      default:
-        return 'Last 7 Days';
-    }
-  };
 
   const StatCard = ({
     title,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   BarChart3,
   Download,
@@ -33,17 +33,17 @@ const AdminDashboard = () => {
   const loading = state.loading.orders;
 
   // Load orders
-  const loadOrders = async () => {
+  const loadOrders = useCallback(async () => {
     try {
       await actions.loadOrders();
     } catch (error) {
       toast.error('Failed to load orders');
     }
-  };
+  }, [actions]);
 
   useEffect(() => {
     loadOrders();
-  }, []);
+  }, [loadOrders]);
 
   // Filter orders
   useEffect(() => {

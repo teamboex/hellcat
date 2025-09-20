@@ -60,8 +60,8 @@ A modern, mobile-first e-commerce platform for premium Hellcat gaming accounts b
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/teamboex/bgmistore.git
-cd bgmistore
+git clone https://github.com/teamboex/hellcat.git
+cd hellcat
 ```
 
 2. **Install dependencies**
@@ -82,7 +82,7 @@ npm start
 ## 🏗️ Project Structure
 
 ```
-bgmistore/
+hellcat/
 ├── public/
 │   └── index.html
 ├── src/

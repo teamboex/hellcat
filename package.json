@@ -1,5 +1,5 @@
 {
-  "name": "bgmi-store",
+  "name": "hellcat-store",
   "version": "1.0.0",
   "description": "Professional Hellcat Store - Mobile First React Application",
   "main": "index.js",
@@ -55,7 +55,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/teamboex/bgmistore.git"
+    "url": "https://github.com/teamboex/hellcat.git"
   },
-  "homepage": "https://teamboex.github.io/bgmistore"
+  "homepage": "https://teamboex.github.io/hellcat"
 }

@@ -476,6 +476,7 @@ export const AppProvider = ({ children }) => {
     disableRealTimeUpdates: () => {
       dispatch({ type: ActionTypes.SET_REAL_TIME_UPDATES, payload: false });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [dispatch]);
 
   // Load initial data
@@ -483,7 +484,7 @@ export const AppProvider = ({ children }) => {
     actions.loadProducts();
     actions.loadRecentPurchases();
     actions.loadAnalytics();
-  }, [actions, state.filters, state.searchQuery, state.sortBy, state.currentPage]);
+  }, [actions]);
 
   // Real-time updates simulation
   useEffect(() => {

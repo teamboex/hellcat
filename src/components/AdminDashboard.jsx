@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   BarChart3,
   Download,
@@ -29,7 +29,7 @@ const AdminDashboard = () => {
   const [showOrderModal, setShowOrderModal] = useState(false);
 
   // Use orders from global state
-  const orders = state.orders || [];
+  const orders = useMemo(() => state.orders || [], [state.orders]);
   const loading = state.loading.orders;
 
   // Load orders
